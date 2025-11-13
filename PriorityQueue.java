@@ -152,13 +152,19 @@ class PriorityQueue<E, P> {
     public Node add(E e, P priority) {
 
         // YOUR CODE GOES HERE
-        //put at the rightmost position of the tree
+        //info fetched from presentation notes!!!
+        //put new Node at the rightmost position of the tree
         //swap up for every single time //use pullUp
             //only stop when either happen:
             //we are at the root
             //The violation is fixed
-
-        return null;
+        //index should be 0 since we are in array
+        Node newNode = new Node(e, priority, tree.size());
+        //node is inserted at head
+        tree.add(newNode);
+        //takes care of the swaps to ensure that the node is inserted at rightmost position of tree
+        pullUp(tree.size()-1);
+        return newNode;
     }
 
 
