@@ -9,6 +9,7 @@
  *
  ********************************************************************/
 
+import javax.sound.midi.SysexMessage;
 import java.util.*;
 import java.util.PriorityQueue;
 
@@ -95,6 +96,7 @@ public class ProblemSolutions {
           }
       }
       if(queue.size() == 1){
+      //problem said to return peek BUT like poll works though [both give insight to lastBoulder]
           return queue.poll();
       }
         //since our queue size is 1 [checked with while condition], we can just take out the last element of the queue!
@@ -179,7 +181,46 @@ public class ProblemSolutions {
 
         //
         //  YOUR CODE GOES HERE
+
         //
-        return new ArrayList<>();  // Make sure returned lists is sorted as indicated above
+         //use priority queues to maintain order!
+        //we can use the low numbers from the min queue and the high numbers of the max queue to get pairs
+        //each of these pairs, we can check for equals to k
+        //we can get a pair thats less than or greater than
+        //in this case if less than -> get a bigger number in max queue
+        //if greater than, get a lesser number from min queue
+        //once we find a good pair then we can add them to the pairList!
+
+        //couldnt figure out how to get rid of unsorted pair dupes at the end..
+        ArrayList<String> pairList = new ArrayList<>();
+        PriorityQueue<Integer> minQueue = new PriorityQueue<>();
+        PriorityQueue<Integer> maxQueue = new PriorityQueue<>(Collections.reverseOrder());
+        //insert to the queues without dupes!
+        for(int i: input){
+            if(!minQueue.contains(i)){
+                minQueue.add(i);
+            }
+            if(!maxQueue.contains(i)){
+                maxQueue.add(i);
+            }
+        }
+        //check for the conditions mentioned above
+        while(!minQueue.isEmpty() && !maxQueue.isEmpty()){
+            int lowerNum = minQueue.peek();
+            int higherNum = maxQueue.peek();
+            if((lowerNum + higherNum) == k) {
+                String pair = "(" + lowerNum + ", " + higherNum + ")";
+                pairList.add(pair);
+                minQueue.poll();
+                maxQueue.poll();
+            } else if((lowerNum + higherNum) > k){
+                //get a smaller number for the sum! since this is greater than
+                minQueue.poll();
+            }
+            //get a bigger number for the sum! since it would be less than
+                maxQueue.poll();
+        }
+        System.out.println();
+        return pairList;  // Make sure returned lists is sorted as indicated above
     }
 }
