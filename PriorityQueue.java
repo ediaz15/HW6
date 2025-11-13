@@ -159,6 +159,7 @@ class PriorityQueue<E, P> {
             //we are at the root
             //The violation is fixed
         //index should be 0 since we are in array
+        //correction, rightmost position shuold be t the end of array, thus the size, at the time i thought it was a tree where we inserted the node at the index oops
         Node newNode = new Node(e, priority, tree.size());
         //node is inserted at head
         tree.add(newNode);
