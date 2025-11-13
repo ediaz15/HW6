@@ -123,8 +123,24 @@ public class ProblemSolutions {
 
         //
         //  YOUR CODE GOES HERE
-        //
-        return new ArrayList<>();  // Make sure result is sorted in ascending order
+        //from the input test case -> dupes are NOT considered to be if case sensitive issue arises
+        //CAT != cat -> both are considered unique
+        //use a min heap for the ascending order and use contains for the dupes array [check if NOT there to add and account for it once] and queue to check if value there!
+        PriorityQueue<String> queue = new PriorityQueue<>();
+        ArrayList<String> dupes = new ArrayList<>();
+        String value = "";
+        for(int i = 0; i < input.size(); i++){
+            value = input.get(i);
+            //check if the value alrdy exists in queue [accounts for a dupe]!
+            if(queue.contains(value)){
+                //if the value is NOT present in dupes, then we add it, otherwise we ignore it
+                if(!dupes.contains(value)) {
+                    dupes.add(value);
+                }
+            }
+            queue.add(value);
+        }
+        return dupes;  // Make sure result is sorted in ascending order
 
     }
 
