@@ -192,6 +192,7 @@ public class ProblemSolutions {
         //once we find a good pair then we can add them to the pairList!
 
         //couldnt figure out how to get rid of unsorted pair dupes at the end..
+        //also tried to change the order, it changes the output tho
         ArrayList<String> pairList = new ArrayList<>();
         PriorityQueue<Integer> minQueue = new PriorityQueue<>();
         PriorityQueue<Integer> maxQueue = new PriorityQueue<>(Collections.reverseOrder());
@@ -220,7 +221,7 @@ public class ProblemSolutions {
             //get a bigger number for the sum! since it would be less than
                 maxQueue.poll();
         }
-        System.out.println();
+
         return pairList;  // Make sure returned lists is sorted as indicated above
     }
 }
