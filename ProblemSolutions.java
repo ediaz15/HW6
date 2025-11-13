@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Erick Diaz
  *
  *   This java file contains the problem solutions for the methods lastBoulder,
  *   showDuplicates, and pair methods. You should utilize the Java Collection
@@ -62,13 +62,43 @@ public class ProblemSolutions {
      * given operations in the question as long as 2 or more boulders;
      * returning the 0 if queue is empty else return pq.peek().
      */
-
   public static int lastBoulder(int[] boulders) {
 
       //
       // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME / SECTION # ABOVE
-      //
-      return -1;
+      //As question suggested, use reverse order:
+      PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+      //Smash conditions
+      //If x == y, both boulders are destroyed, and
+      //     *    If x != y, the boulder of weight x is destroyed, and the boulder of
+      //     *               weight y has new weight y - x.
+      //oversimplified, we elimate boulders using the smash conditions until we have 1 boulder left
+      //return the weight for that boulder
+      //insert values in the pq
+      for(int boulder: boulders){
+          queue.add(boulder);
+      }
+      //the max values are here now, so we now use the smash conditions to check the boulders!
+      int firstBoulderWeight = 0;
+      int otherBoulderWeight = 0;
+      while(queue.size() > 1){
+          //grabbing the first and 2nd boulders from poll, (should be the 2 heaviest ones!), since we removed the boulders alrdy, we technically popped them
+          //we dont rlly worry about check equality cuz popping both alrdy satisfies the goal for that condition!
+
+          firstBoulderWeight = queue.poll();
+          otherBoulderWeight = queue.poll();
+            // in our case, x is first, y is other, we imply that x > y alrdy since x is the largest,y is second largest
+          //in that case, couldn't we just do x - y rather than y-x?
+          if(firstBoulderWeight != otherBoulderWeight) {
+              firstBoulderWeight -= otherBoulderWeight;
+              queue.add(firstBoulderWeight);
+          }
+      }
+      if(queue.size() == 1){
+          return queue.poll();
+      }
+        //since our queue size is 1 [checked with while condition], we can just take out the last element of the queue!
+      return 0;
   }
 
 

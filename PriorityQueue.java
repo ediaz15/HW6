@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Erick Diaz
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -152,6 +152,12 @@ class PriorityQueue<E, P> {
     public Node add(E e, P priority) {
 
         // YOUR CODE GOES HERE
+        //put at the rightmost position of the tree
+        //swap up for every single time //use pullUp
+            //only stop when either happen:
+            //we are at the root
+            //The violation is fixed
+
         return null;
     }
 
@@ -167,8 +173,27 @@ class PriorityQueue<E, P> {
      */
 
     public boolean contains(E e) {
-
+        //need to use o.equals(e) for a condition
+        //need to search the tree from left to right to check if the node matches our val
+        //dupes are allowed so o.equals(e) covers that
+        //each node has a value element so we compare using node.value!
         // ADD YOUR CODE HERE
+        //in this case, a node must be found and must check its value using that o.value.equals()
+        //the real challenge here would be traversing the tree
+        //though it looks like we are using an array?
+        //in the case that the queue is empty, check!
+        if(tree.size() == 0){
+            return false;
+        }
+
+        //we just traverse the array of Nodes values until a match happens using equals();
+        for(int i = 0; i < tree.size();i++) {
+            Node currentNode = tree.get(i);
+            if (currentNode.value.equals(e)) {
+                return true;
+            }
+        }
+            //I think this might be O(n) since we search thru the array elements...
         return false;
     }
 
